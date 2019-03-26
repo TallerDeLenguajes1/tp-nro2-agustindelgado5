@@ -3,37 +3,44 @@
 
 struct empleados
 {
-	char nombre[32];
+	char *nombre;
 	int edad;
 	int id;
 }; typedef struct empleados Persona;
 
-void Cargar(Persona *punt);
-void Mostrar(Persona *punt);
+void Cargar(Persona *punt, int i);
+void Mostrar(Persona *puntEstruc,int i);
 
 int main(void){
-	Persona * punt;
-	int tamanio = sizeof(Persona);
-	printf("%d\n", tamanio);
+	Persona *puntEstruc=(Persona *)malloc(sizeof(Persona)*5);
+	int i=0;
+	puntEstruc[2].edad=22;
+	printf("Edad : %d\n",puntEstruc[2].edad);
+	while (i<5){
+		Cargar(puntEstruc, i);
+		i++;
+	}
 
-	punt=(Persona *)malloc(sizeof(Persona));
-	Cargar(punt);
-	Mostrar(punt);
+	i=0;
+	while(i<5){
+		Mostrar(puntEstruc, i);
+		i++;
+	}
 
 	return 0; 
 }
 
-void Cargar(Persona *punt){
+void Cargar(Persona *puntEstruc, int i){
 	
 	printf("Escriba el nombre del empleado: ");
-	gets(punt->nombre);
-	punt->edad=21;
-	punt->id=37309086;
+	gets(puntEstruc[i].nombre);
+	puntEstruc[i].edad=21;
+	puntEstruc[i].id=37309086;
 
 }
 
-void Mostrar(Persona *punt){
-	printf("Nombre del empleado: %s\n",punt->nombre);
-	printf("Edad del empleado: %d\n",punt->edad);
-	printf("ID del empleado: %d\n", punt->id);
+void Mostrar(Persona *puntEstruc, int i){
+	printf("Nombre del empleado: %s\n",puntEstruc[i].nombre);
+	printf("Edad del empleado: %d\n",puntEstruc[i].edad);
+	printf("ID del empleado: %d\n", puntEstruc[i].id);
 }
